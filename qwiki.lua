@@ -37,12 +37,79 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   local parenturl = parent["url"]
   local html = nil
   
+  if item_type == "page" then
+    if string.match(customurl, "/v/"..item_value)
+      or string.match(customurl, "cdn[0-9]+%.qwiki%.com")
+      or string.match(customurl, "p%.typekit%.com")
+      or string.match(customurl, "use%.typekit%.com")
+      or string.match(customurl, "[^%.]+%.cloudfront%.net")
+      or string.match(customurl, "[^%.]+%.amazonaws.com")
+      or string.match(customurl, "%.json")
+      or string.match(customurl, "%.m3u8")
+      or string.match(customurl, "ikiwq%.com")
+      or string.match(customurl, "/api/")
+      or string.match(customurl, "/assets/") then
+      return true
+    else
+      return false
+    end
+  end
+  
 end
 
 
 wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   local html = nil
+  
+  if item_type == "page" then
+    if string.match(url, item_value)
+      or string.match(url, "%.json")
+      or string.match(url, "%.m3u8") then
+      html = read_file(file)
+      for customurl in string.match(html, '"(http[s]?://[^"]+)"') do
+        if string.match(customurl, "/v/"..item_value)
+          or string.match(customurl, "cdn[0-9]+%.qwiki%.com")
+          or string.match(customurl, "p%.typekit%.com")
+          or string.match(customurl, "use%.typekit%.com")
+          or string.match(customurl, "[^%.]+%.cloudfront%.net")
+          or string.match(customurl, "[^%.]+%.amazonaws.com")
+          or string.match(customurl, "%.json")
+          or string.match(customurl, "%.m3u8")
+          or string.match(customurl, "ikiwq%.com")
+          or string.match(customurl, "/api/")
+          or string.match(customurl, "/assets/") then
+          if downloaded[customurl] ~= true then
+            table.insert(urls, { url=customurl })
+          end
+        end
+      end
+      for customurlnf in string.match(html, '"(http[s]?://[^"]+)"') do
+        if string.match(customurlnf, "/v/"..item_value)
+          or string.match(customurlnf, "cdn[0-9]+%.qwiki%.com")
+          or string.match(customurlnf, "p%.typekit%.com")
+          or string.match(customurlnf, "use%.typekit%.com")
+          or string.match(customurlnf, "[^%.]+%.cloudfront%.net")
+          or string.match(customurlnf, "[^%.]+%.amazonaws.com")
+          or string.match(customurlnf, "ikiwq%.com")
+          or string.match(customurlnf, "/api/")
+          or string.match(customurlnf, "/assets/") then
+          local base = "http://www.qwiki.com"
+          local customurl = base..customurlnf
+          if downloaded[customurl] ~= true then
+            table.insert(urls, { url=customurl })
+          end
+        end
+      end
+      for tsurl in string.match(html, "#EXTINF:[0-9]+,[^0123456789abcdefghijklmnopqrstuvwxyz]+([^%.]+%.ts)") do
+        local base = string.match(url, "(http://[^/]+/[^/]+/[^/]+/[^/]+/)")
+        local fulltsurl = base..tsurl
+        if downloaded[fulltsurl] ~= true then
+          table.insert(urls, { url=fulltsurl })
+        end
+      end
+    end
+  end
   
   return urls
 end
