@@ -84,7 +84,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           end
         end
       end
-      for customurlnf in string.match(html, '"(http[s]?://[^"]+)"') do
+      for customurlnf in string.match(html, '"(/[^"]+)"') do
         if string.match(customurlnf, "/v/"..item_value)
           or string.match(customurlnf, "cdn[0-9]+%.qwiki%.com")
           or string.match(customurlnf, "p%.typekit%.com")
