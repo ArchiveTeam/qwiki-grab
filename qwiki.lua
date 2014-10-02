@@ -84,7 +84,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           end
         end
       end
-      for customurlnf in string.match(html, '"(/[^"]+)"') do
+      for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
         if string.match(customurlnf, "/v/"..item_value)
           or string.match(customurlnf, "cdn[0-9]+%.qwiki%.com")
           or string.match(customurlnf, "p%.typekit%.com")
@@ -101,7 +101,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           end
         end
       end
-      for tsurl in string.match(html, "#EXTINF:[0-9]+,[^0123456789abcdefghijklmnopqrstuvwxyz]+([^%.]+%.ts)") do
+      for tsurl in string.gmatch(html, "#EXTINF:[0-9]+,[^0123456789abcdefghijklmnopqrstuvwxyz]+([^%.]+%.ts)") do
         local base = string.match(url, "(http://[^/]+/[^/]+/[^/]+/[^/]+/)")
         local fulltsurl = base..tsurl
         if downloaded[fulltsurl] ~= true then
