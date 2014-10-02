@@ -38,17 +38,17 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   local html = nil
   
   if item_type == "page" then
-    if string.match(customurl, "/v/"..item_value)
-      or string.match(customurl, "cdn[0-9]+%.qwiki%.com")
-      or string.match(customurl, "p%.typekit%.com")
-      or string.match(customurl, "use%.typekit%.com")
-      or string.match(customurl, "[^%.]+%.cloudfront%.net")
-      or string.match(customurl, "[^%.]+%.amazonaws.com")
-      or string.match(customurl, "%.json")
-      or string.match(customurl, "%.m3u8")
-      or string.match(customurl, "ikiwq%.com")
-      or string.match(customurl, "/api/")
-      or string.match(customurl, "/assets/") then
+    if string.match(url, "/v/"..item_value)
+      or string.match(url, "cdn[0-9]+%.qwiki%.com")
+      or string.match(url, "p%.typekit%.com")
+      or string.match(url, "use%.typekit%.com")
+      or string.match(url, "[^%.]+%.cloudfront%.net")
+      or string.match(url, "[^%.]+%.amazonaws.com")
+      or string.match(url, "%.json")
+      or string.match(url, "%.m3u8")
+      or string.match(url, "ikiwq%.com")
+      or string.match(url, "/api/")
+      or string.match(url, "/assets/") then
       return true
     else
       return false
