@@ -67,7 +67,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       or string.match(url, "%.json")
       or string.match(url, "%.m3u8") then
       html = read_file(file)
-      for customurl in string.match(html, '"(http[s]?://[^"]+)"') do
+      for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if string.match(customurl, "/v/"..item_value)
           or string.match(customurl, "cdn[0-9]+%.qwiki%.com")
           or string.match(customurl, "p%.typekit%.com")
