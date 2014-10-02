@@ -37,6 +37,10 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   local parenturl = parent["url"]
   local html = nil
   
+  if downloaded[url] == true then
+    return false
+  end
+  
   if item_type == "page" then
     if string.match(url, "/v/"..item_value)
       or string.match(url, "cdn[0-9]+%.qwiki%.com")
