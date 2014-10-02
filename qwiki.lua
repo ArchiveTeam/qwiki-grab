@@ -88,6 +88,37 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           if downloaded[customurl] ~= true then
             table.insert(urls, { url=customurl })
           end
+          if string.match(customurl, "s1%.ikiwq%.com") then
+            local newurl = string.gsub(customurl, "s1%.ikiwq%.com", "d1gk3e6myre8ic%.cloudfront%.net")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "vp1%.ikiwq%.com") then
+            local newurl = string.gsub(customurl, "vp1%.ikiwq%.com", "d2japcd9yzs5kz%.cloudfront%.net")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "qp1%.ikiwq%.com") then
+            local newurl = string.gsub(customurl, "qp1%.ikiwq%.com", "d124swhenejuz9%.cloudfront%.net")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "d1gk3e6myre8ic%.cloudfront%.net") then
+            local newurl = string.gsub(customurl, "d1gk3e6myre8ic%.cloudfront%.net", "s1%.ikiwq%.com")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "d2japcd9yzs5kz%.cloudfront%.net") then
+            local newurl = string.gsub(customurl, "d2japcd9yzs5kz%.cloudfront%.net", "vp1%.ikiwq%.com")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "d124swhenejuz9%.cloudfront%.net") then
+            local newurl = string.gsub(customurl, "d124swhenejuz9%.cloudfront%.net", "qp1%.ikiwq%.com")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          end
         end
       end
       for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
@@ -106,6 +137,37 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           if downloaded[customurl] ~= true then
             table.insert(urls, { url=customurl })
           end
+          if string.match(customurl, "s1%.ikiwq%.com") then
+            local newurl = string.gsub(customurl, "s1%.ikiwq%.com", "d1gk3e6myre8ic%.cloudfront%.net")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "vp1%.ikiwq%.com") then
+            local newurl = string.gsub(customurl, "vp1%.ikiwq%.com", "d2japcd9yzs5kz%.cloudfront%.net")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "qp1%.ikiwq%.com") then
+            local newurl = string.gsub(customurl, "qp1%.ikiwq%.com", "d124swhenejuz9%.cloudfront%.net")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "d1gk3e6myre8ic%.cloudfront%.net") then
+            local newurl = string.gsub(customurl, "d1gk3e6myre8ic%.cloudfront%.net", "s1%.ikiwq%.com")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "d2japcd9yzs5kz%.cloudfront%.net") then
+            local newurl = string.gsub(customurl, "d2japcd9yzs5kz%.cloudfront%.net", "vp1%.ikiwq%.com")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          elseif string.match(customurl, "d124swhenejuz9%.cloudfront%.net") then
+            local newurl = string.gsub(customurl, "d124swhenejuz9%.cloudfront%.net", "qp1%.ikiwq%.com")
+            if downloaded[newurl] ~= true then
+              table.insert(urls, { url=newurl })
+            end
+          end
         end
       end
       for tsurl in string.gmatch(html, "#EXTINF:[0-9]+,[^0123456789abcdefghijklmnopqrstuvwxyz]+([^%.]+%.ts)") do
@@ -113,6 +175,37 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         local fulltsurl = base..tsurl
         if downloaded[fulltsurl] ~= true then
           table.insert(urls, { url=fulltsurl })
+        end
+        if string.match(fulltsurl, "s1%.ikiwq%.com") then
+          local newurl = string.gsub(fulltsurl, "s1%.ikiwq%.com", "d1gk3e6myre8ic%.cloudfront%.net")
+          if downloaded[newurl] ~= true then
+            table.insert(urls, { url=newurl })
+          end
+        elseif string.match(fulltsurl, "vp1%.ikiwq%.com") then
+          local newurl = string.gsub(fulltsurl, "vp1%.ikiwq%.com", "d2japcd9yzs5kz%.cloudfront%.net")
+          if downloaded[newurl] ~= true then
+            table.insert(urls, { url=newurl })
+          end
+        elseif string.match(fulltsurl, "qp1%.ikiwq%.com") then
+          local newurl = string.gsub(fulltsurl, "qp1%.ikiwq%.com", "d124swhenejuz9%.cloudfront%.net")
+          if downloaded[newurl] ~= true then
+            table.insert(urls, { url=newurl })
+          end
+        elseif string.match(fulltsurl, "d1gk3e6myre8ic%.cloudfront%.net") then
+          local newurl = string.gsub(fulltsurl, "d1gk3e6myre8ic%.cloudfront%.net", "s1%.ikiwq%.com")
+          if downloaded[newurl] ~= true then
+            table.insert(urls, { url=newurl })
+          end
+        elseif string.match(fulltsurl, "d2japcd9yzs5kz%.cloudfront%.net") then
+          local newurl = string.gsub(fulltsurl, "d2japcd9yzs5kz%.cloudfront%.net", "vp1%.ikiwq%.com")
+          if downloaded[newurl] ~= true then
+            table.insert(urls, { url=newurl })
+          end
+        elseif string.match(fulltsurl, "d124swhenejuz9%.cloudfront%.net") then
+          local newurl = string.gsub(fulltsurl, "d124swhenejuz9%.cloudfront%.net", "qp1%.ikiwq%.com")
+          if downloaded[newurl] ~= true then
+            table.insert(urls, { url=newurl })
+          end
         end
       end
     end
