@@ -52,6 +52,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       or string.match(url, "%.m3u8")
       or string.match(url, "ikiwq%.com")
       or string.match(url, "/api/")
+      or string.match(url, "qwikis%-production%.qwiki%.com")
       or string.match(url, "/assets/") then
       return true
     else
@@ -82,6 +83,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "%.m3u8")
           or string.match(customurl, "ikiwq%.com")
           or string.match(customurl, "/api/")
+          or string.match(customurl, "qwikis%-production%.qwiki%.com")
           or string.match(customurl, "/assets/") then
           if downloaded[customurl] ~= true then
             table.insert(urls, { url=customurl })
@@ -97,6 +99,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "[^%.]+%.amazonaws.com")
           or string.match(customurlnf, "ikiwq%.com")
           or string.match(customurlnf, "/api/")
+          or string.match(customurlnf, "qwikis%-production%.qwiki%.com")
           or string.match(customurlnf, "/assets/") then
           local base = "http://www.qwiki.com"
           local customurl = base..customurlnf
