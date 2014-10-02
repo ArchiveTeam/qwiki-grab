@@ -68,10 +68,42 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local html = nil
   
   if item_type == "page" then
+    if string.match(url, "s1%.ikiwq%.com") then
+      local newurl = string.gsub(url, "s1%.ikiwq%.com", "d1gk3e6myre8ic%.cloudfront%.net")
+      if downloaded[newurl] ~= true then
+        table.insert(urls, { url=newurl })
+      end
+    elseif string.match(url, "vp1%.ikiwq%.com") then
+      local newurl = string.gsub(url, "vp1%.ikiwq%.com", "d2japcd9yzs5kz%.cloudfront%.net")
+      if downloaded[newurl] ~= true then
+        table.insert(urls, { url=newurl })
+      end
+    elseif string.match(url, "qp1%.ikiwq%.com") then
+      local newurl = string.gsub(url, "qp1%.ikiwq%.com", "d124swhenejuz9%.cloudfront%.net")
+      if downloaded[newurl] ~= true then
+        table.insert(urls, { url=newurl })
+      end
+    elseif string.match(url, "d1gk3e6myre8ic%.cloudfront%.net") then
+      local newurl = string.gsub(url, "d1gk3e6myre8ic%.cloudfront%.net", "s1%.ikiwq%.com")
+      if downloaded[newurl] ~= true then
+        table.insert(urls, { url=newurl })
+      end
+    elseif string.match(url, "d2japcd9yzs5kz%.cloudfront%.net") then
+      local newurl = string.gsub(url, "d2japcd9yzs5kz%.cloudfront%.net", "vp1%.ikiwq%.com")
+      if downloaded[newurl] ~= true then
+        table.insert(urls, { url=newurl })
+      end
+    elseif string.match(url, "d124swhenejuz9%.cloudfront%.net") then
+      local newurl = string.gsub(url, "d124swhenejuz9%.cloudfront%.net", "qp1%.ikiwq%.com")
+      if downloaded[newurl] ~= true then
+        table.insert(urls, { url=newurl })
+      end
+    end
     if string.match(url, item_value)
       or string.match(url, "%.json")
       or string.match(url, "%.m3u8") then
       html = read_file(file)
+      
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if string.match(customurl, "/v/"..item_value)
           or string.match(customurl, "cdn[0-9]+%.qwiki%.com")
