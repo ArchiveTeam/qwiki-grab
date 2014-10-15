@@ -57,9 +57,9 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20141002.02"
+VERSION = "20141015.01"
 USER_AGENT = 'ArchiveTeam'
-TRACKER_ID = 'qwiki'
+TRACKER_ID = 'halo'
 TRACKER_HOST = 'tracker.archiveteam.org'
 
 
@@ -146,7 +146,7 @@ def get_hash(filename):
 
 CWD = os.getcwd()
 PIPELINE_SHA1 = get_hash(os.path.join(CWD, 'pipeline.py'))
-LUA_SHA1 = get_hash(os.path.join(CWD, 'qwiki.lua'))
+LUA_SHA1 = get_hash(os.path.join(CWD, 'halo.lua'))
 
 
 def stats_id_function(item):
@@ -166,7 +166,7 @@ class WgetArgs(object):
             WGET_LUA,
             "-U", USER_AGENT,
             "-nv",
-            "--lua-script", "qwiki.lua",
+            "--lua-script", "halo.lua",
             "-o", ItemInterpolation("%(item_dir)s/wget.log"),
             "--no-check-certificate",
             "--output-document", ItemInterpolation("%(item_dir)s/wget.tmp"),
@@ -178,13 +178,13 @@ class WgetArgs(object):
             "--page-requisites",
             "--timeout", "30",
             "--tries", "inf",
-            "--domains", "qwiki.com,ikiwq.com,cloudfront.net,amazonaws.com",
+            "--domains", "halo.bungie.net",
             "--span-hosts",
             "--waitretry", "30",
             "--warc-file", ItemInterpolation("%(item_dir)s/%(warc_file_base)s"),
             "--warc-header", "operator: Archive Team",
-            "--warc-header", "qwiki-dld-script-version: " + VERSION,
-            "--warc-header", ItemInterpolation("qwiki-user: %(item_name)s"),
+            "--warc-header", "halo-dld-script-version: " + VERSION,
+            "--warc-header", ItemInterpolation("halo-user: %(item_name)s"),
         ]
         
         item_name = item['item_name']
@@ -194,12 +194,12 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ("page")
+#        assert item_type in ("page")
         
-        if item_type == 'page':
-            wget_args.append('http://www.qwiki.com/v/{0}'.format(item_value))
-        else:
-            raise Exception('Unknown item')
+#        if item_type == 'page':
+#            wget_args.append('http://www.qwiki.com/v/{0}'.format(item_value))
+#        else:
+#            raise Exception('Unknown item')
         
         if 'bind_address' in globals():
             wget_args.extend(['--bind-address', globals()['bind_address']])
@@ -216,20 +216,19 @@ class WgetArgs(object):
 # This will be shown in the warrior management panel. The logo should not
 # be too big. The deadline is optional.
 project = Project(
-    title="qwiki",
+    title="halo",
     project_html="""
-        <img class="project-logo" alt="Project logo" src="http://archiveteam.org/images/1/10/Qwiki_Logo_June_2012.png" height="50px" title=""/>
-        <h2>www.qwiki.com <span class="links"><a href="http://www.qwiki.com/">Website</a> &middot; <a href="http://tracker.archiveteam.org/qwiki/">Leaderboard</a></span></h2>
-        <p>Archiving Qwiki.</p>
-    """,
-    utc_deadline=datetime.datetime(2014, 11, 1, 23, 59, 0)
+        <img class="project-logo" alt="Project logo" src="http://gamerfreunde.net/wp-content/uploads/2014/02/NewHaloLogo.png" height="50px" title=""/>
+        <h2>halo.bungie.net <span class="links"><a href="http://halo.bungie.net/">Website</a> &middot; <a href="http://tracker.archiveteam.org/halo/">Leaderboard</a></span></h2>
+        <p>Archiving old stats and other data from Halo.</p>
+    """
 )
 
 pipeline = Pipeline(
     CheckIP(),
     GetItemFromTracker("http://%s/%s" % (TRACKER_HOST, TRACKER_ID), downloader,
         VERSION),
-    PrepareDirectories(warc_prefix="qwiki"),
+    PrepareDirectories(warc_prefix="halo"),
     WgetDownload(
         WgetArgs(),
         max_tries=2,
